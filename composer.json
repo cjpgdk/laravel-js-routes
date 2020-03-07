@@ -1,0 +1,36 @@
+{
+    "name": "cjpgdk/laravel-js-routes",
+    "description": "Laravel routes loaded into javascript",
+    "keywords": ["laravel", "javascript", "routes"],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Christian M. Jensen",
+            "email": "cmj@cjpg.dk",
+            "homepage": "https://cjpg.dk"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "illuminate/routing": ">=5.3.0"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "Cjpgdk\\Laravel\\JsRoutes\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Cjpgdk\\Laravel\\JsRoutes\\ServiceProvider"
+            ]
+        }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
