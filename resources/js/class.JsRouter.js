@@ -105,11 +105,15 @@ const JsRouter = class {
      *          var2: 'value'
      *      }
      *  }`
+     * @param {*}  event used to prevent default like any other click event.
      *
      * @returns {boolean|string}
      */
-    navigateTo(route, options = {})
+    navigateTo(route, options = {}, event)
     {
+        if (event) {
+            event.preventDefault();
+        }
         this._navigatingRoute = route;
         /*
 
