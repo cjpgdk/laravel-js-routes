@@ -10,10 +10,11 @@ use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 /**
  * Class ServiceProvider.
  *
- * @package Cjpgdk\Laravel\JsRoutes
- * @author  Christian M. Jensen <cmj@cjpg.dk>
- * @license MIT
- * @link https://github.com/cjpgdk/laravel-js-routes
+ * @category Laravel
+ * @package  Cjpgdk\Laravel\JsRoutes
+ * @author   Christian M. Jensen <cmj@cjpg.dk>
+ * @license  MIT https://opensource.org/licenses/MIT
+ * @link     https://github.com/cjpgdk/laravel-js-routes
  */
 class ServiceProvider extends LaravelServiceProvider
 {
