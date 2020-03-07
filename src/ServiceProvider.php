@@ -132,8 +132,35 @@ class ServiceProvider extends LaravelServiceProvider
         $events = &$this->app['events'];
 
         // load all routes.
+        $jsRoutes = static::buildJsRoutes($this->_getRoutes());
+
+        $views = config('js-routes.bind_to_view', ['footer', 'header']);
+        foreach ($views as $view) {
+            $events->listen(
+                "composing: {$view}",
+                function () use ($jsRoutes) {
+                    $js = config(
+                        'js-routes.js_routes_var',
+                        'window.jsLaravelRoutes'
+                    );
+                    $js .= '='.json_encode($jsRoutes).';';
+                    echo "<script>{$js}</script>";
+                }
+            );
+        }
+    }
+
+    /**
+     * Builds the routes array.
+     *
+     * @param RouteCollection $routes
+     *
+     * @return array
+     */
+    public static function buildJsRoutes($routes)
+    {
         $jsRoutes = [];
-        foreach ($this->_getRoutes() as $route) {
+        foreach ($routes as $route) {
             $domain = trim($route->domain(), '/');
             $uri = $route->uri();
             $url = $domain ? '//'.$domain.'/'.$uri : '/'.ltrim($uri, '/');
@@ -176,22 +203,7 @@ class ServiceProvider extends LaravelServiceProvider
                 'domainVariables' => $matches[1] ?? null,
             ];
         }
-
-
-        $views = config('js-routes.bind_to_view', ['footer', 'header']);
-        foreach ($views as $view) {
-            $events->listen(
-                "composing: {$view}",
-                function () use ($jsRoutes) {
-                    $js = config(
-                        'js-routes.js_routes_var',
-                        'window.jsLaravelRoutes'
-                    );
-                    $js .= '='.json_encode($jsRoutes).';';
-                    echo "<script>{$js}</script>";
-                }
-            );
-        }
+        return $jsRoutes;
     }
 
     /**
