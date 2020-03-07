@@ -42,12 +42,12 @@ const JsRouter = class {
     navigator(url)
     {
         return new Promise((resolve, reject) => {
-                if (!this._navigator) {
-                    reject("missing navigator, to set the default call 'this.setNavigator((url) => { location.assign(url); })'");
-                } else {
-                    this._navigator(url);
-                    resolve();
-                }
+            if (!this._navigator) {
+                reject("missing navigator, to set the default call 'this.setNavigator((url) => { location.assign(url); })'");
+            } else {
+                this._navigator(url);
+                resolve();
+            }
         });
     }
 
@@ -159,13 +159,13 @@ const JsRouter = class {
         for (let varName in routeObject.variables) {
             let varOptions = routeObject.variables[varName]
             /* required var! */
-            if (varOptions.required && !options.hasOwnProperty(varName)) {
+            if (varOptions.required && !options.vars.hasOwnProperty(varName)) {
                 console.error(
                     `Route named '${this._navigatingRoute}', require variables: `
                     +`${Object.keys(routeObject.variables).join(', ')}`
                 );
                 return false;
-            } else if (!varOptions.required && !options.hasOwnProperty(varName)) {
+            } else if (!varOptions.required && !options.vars.hasOwnProperty(varName)) {
                 /* optional var! but not in the var list. */
                 url = url.replace(`/{${varName}?}`, '');
                 continue;
