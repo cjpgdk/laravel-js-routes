@@ -2,6 +2,8 @@
 
 namespace Cjpgdk\Laravel\JsRoutes;
 
+use Cjpgdk\Laravel\JsRoutes\Console\Commands\JsRoutesClearCommand;
+use Cjpgdk\Laravel\JsRoutes\Console\Commands\JsRoutesCacheCommand;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Str;
 use Route;
@@ -25,6 +27,12 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function register()
     {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                JsRoutesClearCommand::class,
+                JsRoutesCacheCommand::class
+            ]);
+        }
     }
 
 

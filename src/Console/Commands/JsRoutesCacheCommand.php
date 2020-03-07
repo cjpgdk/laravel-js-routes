@@ -5,7 +5,15 @@ namespace Cjpgdk\Laravel\JsRoutes\Console\Commands;
 use Illuminate\Foundation\Console\RouteCacheCommand;
 use Illuminate\Support\Str;
 
-
+/**
+ * Class JsRoutesCacheCommand
+ *
+ * @category Laravel
+ * @package  Cjpgdk\Laravel\JsRoutes\Console\Commands
+ * @author   Christian M. Jensen <cmj@cjpg.dk>
+ * @license  MIT https://opensource.org/licenses/MIT
+ * @link     https://github.com/cjpgdk/laravel-js-routes
+ */
 class JsRoutesCacheCommand extends RouteCacheCommand
 {
     /**
