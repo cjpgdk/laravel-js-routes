@@ -1,5 +1,6 @@
 ## laravel-js-routes.
-
+Just an other way of loading Laravel routes into Javascript.
+Nothing special!
 
 ## Install
 
@@ -18,9 +19,47 @@
 load the header view `@include('js-routes::header')`, this will append all loaded routes 
 into `window.jsLaravelRoutes`.
 
+*load js in `app.js`* 
 
-load js....
+```javascript
+/* plain JavaScript */
+import JsRouter from "./js-routes/class.JsRouter";
+window.JsRouter = new JsRouter(window.jsLaravelRoutes);
+/* See the file for methods. */
 
+// the VueJs file loads the file class.JsRouter, 
+// so no need to load both, if only using Vue.
+
+/* VueJS */
+window.Vue = require('vue');
+import VueJsRouter from "./js-routes/vue.JsRouter";
+Vue.use(VueJsRouter, { 
+    /* all routes or value of config: `js_routes_var` */
+    routes: window.jsLaravelRoutes
+});
+/*
+ * Vue.JsRouter : class instance, See the file for methods.
+ * 
+ * Vue.navigateTo('route-name', {
+ *     // variables used in the domain, optional variables goes here as well.
+ *     vars: {
+ *         var: 'value',
+ *         var2: 'value'
+ *     },
+ *     // variables used in the domain, if needed, then they are required.
+ *     domain: {
+ *         var: 'value',
+ *         var2: 'value'
+ *     }
+ * });
+ * 
+ *  OR in components.
+ * 
+ *  this.$navigateTo('route-name', {...});
+ *
+ */
+
+```
 
 
 #### Config

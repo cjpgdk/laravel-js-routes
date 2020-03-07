@@ -89,19 +89,30 @@ const JsRouter = class {
         return this._routes[route];
     }
 
+    /**
+     * Navigate the named route.
+     *
+     * @param {String} route
+     * @param {Object} options `options = {
+     *      // variables used in the domain, optional variables goes here as well.
+     *      vars: {
+     *          var: 'value',
+     *          var2: 'value'
+     *      },
+     *      // variables used in the domain, if needed, then they are required.
+     *      domain: {
+     *          var: 'value',
+     *          var2: 'value'
+     *      }
+     *  }`
+     *
+     * @returns {boolean|string}
+     */
     navigateTo(route, options = {})
     {
         this._navigatingRoute = route;
         /*
-            options = {
-                vars: {
 
-                },
-                domain: {
-                    var: 'value'
-                    var2: 'value'
-                }
-            }
          */
         let routeObject = this.getRoute(route);
         if (!routeObject) {
@@ -121,6 +132,16 @@ const JsRouter = class {
         );
     }
 
+    /**
+     * Parse the uri in a route, with the options required.
+     *
+     * @param {String} url
+     * @param {Object} routeObject
+     * @param {Object} options
+     *
+     * @returns {string|boolean} Boolean false, on error. See the console.
+     * @private
+     */
     _parseRouteUri(url, routeObject, options)
     {
         if (!routeObject.variables || routeObject.variables.length === 0) {
