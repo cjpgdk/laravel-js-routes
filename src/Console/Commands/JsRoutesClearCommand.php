@@ -37,6 +37,6 @@ class JsRoutesClearCommand extends RouteClearCommand
     public function handle()
     {
         $this->files->delete($this->laravel->bootstrapPath('cache/js-routes.php'));
-        $this->info('JS Route cache cleared!');
+        $this->info('JS Routes cache cleared!');
     }
 }

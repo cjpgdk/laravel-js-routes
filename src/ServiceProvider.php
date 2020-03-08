@@ -170,7 +170,7 @@ class ServiceProvider extends LaravelServiceProvider
      *
      * @param RouteCollection $routes The collection of routes
      *
-     * @return array
+     * @return array a js-routes formatted array of all routes.
      */
     public static function buildJsRoutes($routes)
     {
