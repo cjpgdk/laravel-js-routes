@@ -28,10 +28,12 @@ class ServiceProvider extends LaravelServiceProvider
     public function register()
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([
+            $this->commands(
+                [
                 JsRoutesClearCommand::class,
                 JsRoutesCacheCommand::class
-            ]);
+                ]
+            );
         }
     }
 
@@ -140,7 +142,12 @@ class ServiceProvider extends LaravelServiceProvider
         $events = &$this->app['events'];
 
         // load all routes.
-        $jsRoutes = static::buildJsRoutes($this->_getRoutes());
+        $cacheFile = $this->app->bootstrapPath('cache/js-routes.php');
+        if ($this->app['files']->exists($cacheFile)) {
+            $jsRoutes = include $cacheFile;
+        } else {
+            $jsRoutes = static::buildJsRoutes($this->_getRoutes());
+        }
 
         $views = config('js-routes.bind_to_view', ['footer', 'header']);
         foreach ($views as $view) {
@@ -161,7 +168,7 @@ class ServiceProvider extends LaravelServiceProvider
     /**
      * Builds the routes array.
      *
-     * @param RouteCollection $routes
+     * @param RouteCollection $routes The collection of routes
      *
      * @return array
      */
