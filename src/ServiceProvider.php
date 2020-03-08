@@ -30,8 +30,8 @@ class ServiceProvider extends LaravelServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands(
                 [
-                JsRoutesClearCommand::class,
-                JsRoutesCacheCommand::class
+                    JsRoutesClearCommand::class,
+                    JsRoutesCacheCommand::class
                 ]
             );
         }

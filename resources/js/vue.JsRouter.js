@@ -1,7 +1,7 @@
 import JsRouter from "./class.JsRouter";
 
 /**
- * A simple plugin for VueJS to ouse the JsRouter class.
+ * A simple plugin for VueJS to use the JsRouter class.
  *
  * @type {{install: VueJsRouter.install}}
  */
