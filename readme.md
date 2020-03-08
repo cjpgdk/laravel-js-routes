@@ -15,6 +15,22 @@ Nothing special!
 
 `php artisan vendor:publish --provider="Cjpgdk\Laravel\JsRoutes\ServiceProvider" --tag=js-routes-js`
 
+
+**NOTE** The js-routes service provider, is auto loaded in Laravel, you may disable this by adding the following code to your `composer.json`, if you need to load the package after other dependencies.
+
+```json
+{
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+                "Cjpgdk\\Laravel\\JsRoutes\\ServiceProvider"
+            ]
+        }
+    }
+}
+```
+
+
 #### After install
 load the header view `@include('js-routes::header')`, this will append all loaded routes 
 into `window.jsLaravelRoutes`.

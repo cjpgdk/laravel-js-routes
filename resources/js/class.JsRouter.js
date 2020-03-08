@@ -94,22 +94,57 @@ const JsRouter = class {
      *
      * @param {String} route
      * @param {Object} options `options = {
-     *      // variables used in the domain, optional variables goes here as well.
+     *      // variables used in the URI, optional variables goes here as well. see example
      *      vars: {
      *          var: 'value',
      *          var2: 'value'
      *      },
-     *      // variables used in the domain, if needed, then they are required.
+     *      // variables used in the DOMAIN, if needed, then they are required.
      *      domain: {
      *          var: 'value',
      *          var2: 'value'
      *      }
      *  }`
+     * @param {*}  event used to prevent default like any other click event.
+     *
+     * @example
+     * // we ned to navigate to "verification.verify" url: /email/send/{id}/{submit?}
+     * // wee will call the navigateTo method like this. (No domain, only Uri variables)
+     * let router = new JsRouter(window.availableRoutes);
+     * router.navigateTo("verification.verify", {
+     *      vars: {
+     *          id: 123,
+     *          // submit: 'yes' // optional, and we do not what to send out emails with out a confirm!
+     *      }
+     * });
+     *
+     * // by not adding the submit variable, the url will become.
+     * // url: /email/send/123
+     *
+     * // If we add the submit variable, the url will become.
+     * // url: /email/send/123/yes
+     *
+     * @example
+     * // we ned to navigate to "verification.verify" url: //{user}.example.com/email/verify/{id}/{hash}
+     * // wee will call the navigateTo method like this. (Domain and Uri variables are used)
+     * let router = new JsRouter(window.availableRoutes);
+     * router.navigateTo("verification.verify", {
+     *      vars: {
+     *          id: 123,
+     *          hash: 'sfdsf-sdfsewf-edfqegsdg-sdgsdg-22'
+     *      },
+     *      domain: {
+     *          user: 'cmj'
+     *      }
+     * });
      *
      * @returns {boolean|string}
      */
-    navigateTo(route, options = {})
+    navigateTo(route, options = {}, event = null)
     {
+        if (event) {
+            event.preventDefault();
+        }
         this._navigatingRoute = route;
         /*
 
